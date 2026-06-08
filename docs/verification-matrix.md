@@ -122,6 +122,7 @@ Avoid storing:
 - Stripe Financial Connections: https://docs.stripe.com/financial-connections
 - Stripe Connect payouts: https://docs.stripe.com/connect/add-and-pay-out-guide
 - Socure Verify integration guide: https://help.socure.com/riskos/docs/verify-integration-guide
-- Alloy API docs: https://developer.alloyapp.io/dev/alloy-api/
+- Alloy authentication guide: https://developer.alloy.com/public/docs/authentication-guide
+- Alloy account-level API keys: https://developer.alloy.com/public/docs/account-level-api-keys
 - Pinwheel Income and Employment: https://docs.pinwheelapi.com/public/v2022-03-02/docs/income-and-employment-1
 - Equifax Verification of Employment and Income: https://developer.equifax.com/products/apiproducts/verification-employment-and-income

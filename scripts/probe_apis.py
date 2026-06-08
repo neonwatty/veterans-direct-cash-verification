@@ -142,8 +142,8 @@ TARGETS: list[ProbeTarget] = [
     ProbeTarget(
         provider="Alloy Identity Decisioning",
         claim="Identity, KYC/KYB, AML, fraud workflow orchestration",
-        docs_url="https://developer.alloyapp.io/dev/alloy-api/",
-        boundary_url="https://api.alloy.co/v1/evaluations",
+        docs_url="https://developer.alloy.com/public/docs/authentication-guide",
+        boundary_url="https://sandbox.alloy.co/v1/evaluations",
         boundary_method="POST",
         boundary_json={},
         credential_envs=("ALLOY_API_KEY",),

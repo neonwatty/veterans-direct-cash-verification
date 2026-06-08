@@ -25,6 +25,8 @@ The most authoritative long-term path is to pursue VA API production access for 
 ## Repo Contents
 
 - `docs/verification-matrix.md`: matrix of claims, API methods, automation level, access limits, and fallbacks.
+- `docs/api-access-authentication-research.md`: per-API setup/authentication difficulty and recommended access strategy.
+- `docs/api-testing-plan.md`: testing loop for public, sandbox, and credentialed API probes.
 - `scripts/probe_apis.py`: repeatable API probe harness.
 - `.env.example`: environment variables for deeper credentialed tests.
 

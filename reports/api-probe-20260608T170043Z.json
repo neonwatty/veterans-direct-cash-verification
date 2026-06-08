@@ -11,7 +11,7 @@
     "docs": {
       "body_sample": "<!doctype html><html lang=\"en\"><head><meta http-equiv=\"X-UA-Compatible\" content=\"IE=11\"/><script>!function(e,t,a,n){e[n]=e[n]||[],e[n].push({\"gtm.start\":(new Date).getTime(),event:\"gtm.js\"});var g=t.getElementsByTagName(a)[0],m=t.createElement(a);m.async=!0,m.src=\"https://www.googletagmanager.com/gtm.js?id=GTM-5L44LTQM\",g.parentNode.insertBefore(m,g)}(window,document,\"script\",\"dataLayer\")</script><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fi",
       "content_type": "text/html",
-      "elapsed_ms": 384,
+      "elapsed_ms": 748,
       "ok": true,
       "status": 200
     },
@@ -20,7 +20,7 @@
       "fetch": {
         "body_sample": "{\"openapi\":\"3.0.1\",\"info\":{\"title\":\"Veteran Confirmation\",\"description\":\"The Veteran Confirmation API returns whether a given person is `\\\"confirmed\\\"` or\\n`\\\"not confirmed\\\"` as a [Title 38 Veteran](https://www.ecfr.gov/current/title-38).\\nConfirming a Veteran's status can be useful for determining eligibility for\\ndiscounts, services, preferential treatment, and certain jobs or education\\nprograms.\\n\\nA Veteran is a person who served in the active military, naval, air, or space\\nservice, and w",
         "content_type": "application/json",
-        "elapsed_ms": 747,
+        "elapsed_ms": 898,
         "ok": true,
         "status": 200
       },
@@ -40,9 +40,9 @@
     },
     "provider": "VA Veteran Confirmation",
     "unauthenticated_boundary": {
-      "body_sample": "{\n  \"message\":\"No API key found in request\",\n  \"request_id\":\"c473303ff6f5221c72e7ce0be091bd7e\"\n}",
+      "body_sample": "{\n  \"message\":\"No API key found in request\",\n  \"request_id\":\"bb35812cfd4eb87eae5d6606799a6111\"\n}",
       "content_type": "application/json; charset=utf-8",
-      "elapsed_ms": 352,
+      "elapsed_ms": 893,
       "expected_auth_or_validation_boundary": true,
       "ok": false,
       "status": 401
@@ -60,7 +60,7 @@
     "docs": {
       "body_sample": "<!doctype html><html lang=\"en\"><head><meta http-equiv=\"X-UA-Compatible\" content=\"IE=11\"/><script>!function(e,t,a,n){e[n]=e[n]||[],e[n].push({\"gtm.start\":(new Date).getTime(),event:\"gtm.js\"});var g=t.getElementsByTagName(a)[0],m=t.createElement(a);m.async=!0,m.src=\"https://www.googletagmanager.com/gtm.js?id=GTM-5L44LTQM\",g.parentNode.insertBefore(m,g)}(window,document,\"script\",\"dataLayer\")</script><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fi",
       "content_type": "text/html",
-      "elapsed_ms": 287,
+      "elapsed_ms": 673,
       "ok": true,
       "status": 200
     },
@@ -69,7 +69,7 @@
       "fetch": {
         "body_sample": "{\"openapi\":\"3.0.1\",\"info\":{\"title\":\"Veteran Service History and Eligibility API\",\"description\":\"With this API you can\\n* Return enrolled benefits for a Veteran.\\n* Return a Veteran's enrollment status in minimum essential coverage (MEC) as defined by\\nthe Affordable Care Act (ACA).  (restricted access).\\n* Return disability ratings of a Veteran.\\n* Return certain benefit flashes for a Veteran.\\n* Return the service history of a Veteran.\\n* Confirm an individual's Title 38 Veteran status.\\n\\nThis",
         "content_type": "application/json",
-        "elapsed_ms": 907,
+        "elapsed_ms": 1148,
         "ok": true,
         "status": 200
       },
@@ -103,7 +103,7 @@
     "unauthenticated_boundary": {
       "body_sample": "{ \n  \"status\": 401,\n  \"error\": \"Invalid token.\"\n}\n",
       "content_type": "application/json",
-      "elapsed_ms": 312,
+      "elapsed_ms": 748,
       "expected_auth_or_validation_boundary": true,
       "ok": false,
       "status": 401
@@ -121,7 +121,7 @@
     "docs": {
       "body_sample": "<!doctype html><html lang=\"en\"><head><meta http-equiv=\"X-UA-Compatible\" content=\"IE=11\"/><script>!function(e,t,a,n){e[n]=e[n]||[],e[n].push({\"gtm.start\":(new Date).getTime(),event:\"gtm.js\"});var g=t.getElementsByTagName(a)[0],m=t.createElement(a);m.async=!0,m.src=\"https://www.googletagmanager.com/gtm.js?id=GTM-5L44LTQM\",g.parentNode.insertBefore(m,g)}(window,document,\"script\",\"dataLayer\")</script><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,shrink-to-fi",
       "content_type": "text/html",
-      "elapsed_ms": 608,
+      "elapsed_ms": 639,
       "ok": true,
       "status": 200
     },
@@ -130,7 +130,7 @@
       "fetch": {
         "body_sample": "{\"openapi\":\"3.0.1\",\"info\":{\"title\":\"VA Letter Generator API\",\"description\":\"The VA Letter Generator API lets Veterans and their eligible dependents\\ngenerate and download official VA letters with watermarks and logos.\\nVeterans and their dependents may only generate and download letters\\nfor which they are eligible. The letters will be populated with the\\nVeteran's or eligible dependent's address, Veteran service details,\\nand the Veteran's or dependent's benefits information when returned.\\n\\nT",
         "content_type": "application/json",
-        "elapsed_ms": 692,
+        "elapsed_ms": 933,
         "ok": true,
         "status": 200
       },
@@ -154,7 +154,7 @@
     "unauthenticated_boundary": {
       "body_sample": "{ \n  \"status\": 401,\n  \"error\": \"Invalid token.\"\n}\n",
       "content_type": "application/json",
-      "elapsed_ms": 293,
+      "elapsed_ms": 859,
       "expected_auth_or_validation_boundary": true,
       "ok": false,
       "status": 401
@@ -174,7 +174,7 @@
     "docs": {
       "body_sample": "<!DOCTYPE html><html data-dpl-id=\"dpl_C9rSKagUxfLUUNrhDPNCvkxVzhXt\" lang=\"en\"><head><meta charSet=\"utf-8\"/><link rel=\"preconnect\" href=\"https://app.buildwithfern.com\" crossorigin=\"\"/><link href=\"https://www.googletagmanager.com\" rel=\"dns-prefetch\"/><meta name=\"viewport\" content=\"width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=yes\"/><link rel=\"preload\" href=\"https://files.buildwithfern.com/idme.docs.buildwithfern.com/7c96a1c7aeae2908016ae",
       "content_type": "text/html; charset=utf-8",
-      "elapsed_ms": 672,
+      "elapsed_ms": 778,
       "ok": true,
       "status": 200
     },
@@ -183,7 +183,7 @@
     "unauthenticated_boundary": {
       "body_sample": "{\"message\":\"Access token is invalid or missing\",\"code\":110}",
       "content_type": "application/json; charset=utf-8",
-      "elapsed_ms": 411,
+      "elapsed_ms": 512,
       "expected_auth_or_validation_boundary": true,
       "ok": false,
       "status": 401
@@ -201,7 +201,7 @@
     "docs": {
       "body_sample": "<!DOCTYPE html><html data-dpl-id=\"dpl_C9rSKagUxfLUUNrhDPNCvkxVzhXt\" lang=\"en\"><head><meta charSet=\"utf-8\"/><link rel=\"preconnect\" href=\"https://app.buildwithfern.com\" crossorigin=\"\"/><link href=\"https://www.googletagmanager.com\" rel=\"dns-prefetch\"/><meta name=\"viewport\" content=\"width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=yes\"/><link rel=\"preload\" href=\"https://files.buildwithfern.com/idme.docs.buildwithfern.com/7c96a1c7aeae2908016ae",
       "content_type": "text/html; charset=utf-8",
-      "elapsed_ms": 563,
+      "elapsed_ms": 911,
       "ok": true,
       "status": 200
     },
@@ -210,7 +210,7 @@
     "unauthenticated_boundary": {
       "body_sample": "{\"errors\":[{\"message\":\"Credentials used are not associated with any account\",\"code\":1100}]}",
       "content_type": "application/json; charset=utf-8",
-      "elapsed_ms": 695,
+      "elapsed_ms": 698,
       "expected_auth_or_validation_boundary": true,
       "ok": false,
       "status": 401
@@ -230,7 +230,7 @@
     "docs": {
       "body_sample": "<!DOCTYPE html>\n\n<html lang=\"en-us\" class=\"tw-overflow-x-hidden lg:tw-overflow-x-auto\">\n    <!-- start custom head snippets -->\n\n<!-- Concord -->\n<script\n    type=\"text/javascript\"\n    src=\"https://api.concord.tech/site-v1/8bd3cc92-c89a-47ff-b541-4e83aa5b62db/site-client\"\n></script>\n<!-- End Concord -->\n <head>\n     <!-- Google Tag Manager --> \n<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createEl",
       "content_type": "text/html; charset=UTF-8",
-      "elapsed_ms": 323,
+      "elapsed_ms": 1947,
       "ok": true,
       "status": 200
     },
@@ -239,7 +239,7 @@
     "unauthenticated_boundary": {
       "body_sample": "{\"verificationId\":null,\"currentStep\":\"error\",\"errorIds\":[\"noVerification\"],\"segment\":null,\"subSegment\":null,\"locale\":\"en-US\",\"country\":null,\"created\":null,\"updated\":null,\"errorDetailId\":null,\"systemErrorMessage\":\"No verification found with id 'not-a-real-verification-id'\",\"redirectUrl\":null}",
       "content_type": "application/json",
-      "elapsed_ms": 452,
+      "elapsed_ms": 471,
       "expected_auth_or_validation_boundary": true,
       "ok": false,
       "status": 404
@@ -257,7 +257,7 @@
     "docs": {
       "body_sample": "<!DOCTYPE html><html data-dpl-id=\"dpl_C9rSKagUxfLUUNrhDPNCvkxVzhXt\" lang=\"en\"><head><meta charSet=\"utf-8\"/><link rel=\"preconnect\" href=\"https://app.buildwithfern.com\" crossorigin=\"\"/><link href=\"https://cdn.segment.com\" rel=\"dns-prefetch\"/><meta name=\"viewport\" content=\"width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=yes\"/><link rel=\"preload\" as=\"image\" imageSrcSet=\"https://app.buildwithfern.com/_next/image?url=https%3A%2F%2Ffiles.buildw",
       "content_type": "text/html; charset=utf-8",
-      "elapsed_ms": 655,
+      "elapsed_ms": 846,
       "ok": true,
       "status": 200
     },
@@ -266,7 +266,7 @@
     "unauthenticated_boundary": {
       "body_sample": "{\"errors\":[{\"title\":\"Must be authenticated to access this endpoint\"}]}",
       "content_type": "application/json; charset=utf-8",
-      "elapsed_ms": 217,
+      "elapsed_ms": 512,
       "expected_auth_or_validation_boundary": true,
       "ok": false,
       "status": 401
@@ -284,7 +284,7 @@
     "docs": {
       "body_sample": "<!doctype html>\n      <html  id=\"\u200b\" lang=\"en-US\">\n        <head>\n          <meta charSet=\"utf-8\" />\n          \n          <title data-rh=\"true\">The Verification Sessions API | Stripe Documentation</title>\n          <meta data-rh=\"true\" property=\"og:type\" content=\"website\"/><meta data-rh=\"true\" property=\"og:title\" content=\"The Verification Sessions API\"/><meta data-rh=\"true\" property=\"og:description\" content=\"Learn more about the Verification Sessions API that powers Stripe Identity.\"/><meta dat",
       "content_type": "text/html; charset=utf-8",
-      "elapsed_ms": 1422,
+      "elapsed_ms": 1303,
       "ok": true,
       "status": 200
     },
@@ -293,7 +293,7 @@
     "unauthenticated_boundary": {
       "body_sample": "{\n  \"error\": {\n    \"message\": \"You did not provide an API key. You need to provide your API key in the Authorization header, using Bearer auth (e.g. 'Authorization: Bearer YOUR_SECRET_KEY'). See https://stripe.com/docs/api#authentication for details, or we can help at https://support.stripe.com/.\",\n    \"type\": \"invalid_request_error\"\n  }\n}\n",
       "content_type": "application/json",
-      "elapsed_ms": 238,
+      "elapsed_ms": 363,
       "expected_auth_or_validation_boundary": true,
       "ok": false,
       "status": 401
@@ -311,7 +311,7 @@
     "docs": {
       "body_sample": "<!doctype html>\n      <html  id=\"\u200b\" lang=\"en-US\">\n        <head>\n          <meta charSet=\"utf-8\" />\n          \n          <title data-rh=\"true\">Stripe Financial Connections | Stripe Documentation</title>\n          <meta data-rh=\"true\" property=\"og:type\" content=\"website\"/><meta data-rh=\"true\" property=\"og:title\" content=\"Stripe Financial Connections\"/><meta data-rh=\"true\" property=\"og:description\" content=\"Access permissioned data from your users&#x27; financial accounts.\"/><meta data-rh=\"true\"",
       "content_type": "text/html; charset=utf-8",
-      "elapsed_ms": 1227,
+      "elapsed_ms": 1127,
       "ok": true,
       "status": 200
     },
@@ -320,7 +320,7 @@
     "unauthenticated_boundary": {
       "body_sample": "{\n  \"error\": {\n    \"message\": \"You did not provide an API key. You need to provide your API key in the Authorization header, using Bearer auth (e.g. 'Authorization: Bearer YOUR_SECRET_KEY'). See https://stripe.com/docs/api#authentication for details, or we can help at https://support.stripe.com/.\",\n    \"type\": \"invalid_request_error\"\n  }\n}\n",
       "content_type": "application/json",
-      "elapsed_ms": 250,
+      "elapsed_ms": 483,
       "expected_auth_or_validation_boundary": true,
       "ok": false,
       "status": 401
@@ -336,9 +336,9 @@
       "SOCURE_API_KEY": false
     },
     "docs": {
-      "body_sample": "<!DOCTYPE html><html lang=\"en\" style=\"\" data-color-mode=\"system\" class=\" useReactApp  \"><head><meta charset=\"utf-8\"><meta name=\"readme-deploy\" content=\"5.764.0\"><meta name=\"readme-subdomain\" content=\"riskos\"><meta name=\"readme-repo\" content=\"socure-enterprise-1-abb31459b2f2\"><meta name=\"readme-basepath-childProject\" content=\"riskos\"><meta name=\"readme-project-flags\" content=\"h8uPiw14o3EkR+4u5HtwQg==:DANgB4q/0Ox0LyWKYh3au3KlGpbotA3NiMfFRX5IP9tzQBxfqHxDv0imVizXC1AiyXLpZJDl9hmfMtpt3BJmXv53pym0BDONj",
+      "body_sample": "<!DOCTYPE html><html lang=\"en\" style=\"\" data-color-mode=\"system\" class=\" useReactApp  \"><head><meta charset=\"utf-8\"><meta name=\"readme-deploy\" content=\"5.764.0\"><meta name=\"readme-subdomain\" content=\"riskos\"><meta name=\"readme-repo\" content=\"socure-enterprise-1-abb31459b2f2\"><meta name=\"readme-basepath-childProject\" content=\"riskos\"><meta name=\"readme-project-flags\" content=\"WN1bYmrnZ/lIdI6fAhsCKQ==:hptTVbKUG3+Slv6RRqbd/hIMHKS6wBMERPUmSb02S9DK9kFjlsZIaPu0o1xemu6lMjep2ohruWn/5vOGszKYMaXZ31f8dxUTP",
       "content_type": "text/html; charset=utf-8",
-      "elapsed_ms": 2618,
+      "elapsed_ms": 2335,
       "ok": true,
       "status": 200
     },
@@ -347,7 +347,7 @@
     "unauthenticated_boundary": {
       "body_sample": "{\"error\":\"authentication failed\",\"code\":\"AUTHENTICATION_FAILED\"}",
       "content_type": "application/json; charset=utf-8",
-      "elapsed_ms": 188,
+      "elapsed_ms": 286,
       "expected_auth_or_validation_boundary": true,
       "ok": false,
       "status": 401
@@ -363,18 +363,18 @@
       "ALLOY_API_KEY": false
     },
     "docs": {
-      "body_sample": "<!doctype html><html lang=en dir=ltr class=\"docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-dev/alloy-api/alloy-api\" data-has-hydrated=false><head><meta charset=UTF-8><meta name=generator content=\"Docusaurus v3.10.1\"><title data-rh=true>Alloy API | Developer Docs</title><meta data-rh=true name=viewport content=\"width=device-width, initial-scale=1.0\"/><meta data-rh=true name=twitter:card content=summary_large_image /><meta data-rh=true property=og:image c",
-      "content_type": "text/html",
-      "elapsed_ms": 893,
+      "body_sample": "<!DOCTYPE html><html lang=\"en\" style=\"\" data-color-mode=\"light\" class=\" useReactApp  \"><head><meta charset=\"utf-8\"><meta name=\"readme-deploy\" content=\"5.764.0\"><meta name=\"readme-subdomain\" content=\"alloy-public\"><meta name=\"readme-repo\" content=\"alloy-public-ba5623d7ab2f\"><meta name=\"readme-basepath-childProject\" content=\"public\"><meta name=\"readme-project-flags\" content=\"PkEx0krw85OdDGXseEKx8Q==:a46K7O8fe+xJ+3pHBJmG9aiGMq44eHgddNyVVlOvyWkOjwNkUz/MypX92L3N9XynEVw1jsFoQjQ71B/mSHTkI6nN78hyz6L5j6I",
+      "content_type": "text/html; charset=utf-8",
+      "elapsed_ms": 1283,
       "ok": true,
       "status": 200
     },
     "notes": "Strong orchestration candidate for fintech-style onboarding; likely heavier than MVP unless payout compliance demands it.",
     "provider": "Alloy Identity Decisioning",
     "unauthenticated_boundary": {
-      "body_sample": "{\"status_code\":400,\"error\":{\"minor_code\":4001,\"type\":\"Header Validation Failure\",\"message\":\"Verify that your OAuth bearer token is well formed and that your application version is a positive integer if passed.\",\"details\":{\"message\":\"\\\"authorization\\\" is required\",\"path\":\"authorization\",\"type\":\"any.required\",\"context\":{\"key\":\"authorization\"}},\"error_token\":\"ac0a8234-f4b9-40de-817e-804b660a0155\"},\"timestamp\":1780876687063,\"evaluation_token\":null,\"entity_token\":null,\"application_token\":null,\"applic",
+      "body_sample": "{\"status_code\":400,\"error\":{\"minor_code\":4001,\"type\":\"Header Validation Failure\",\"message\":\"Verify that your OAuth bearer token is well formed and that your application version is a positive integer if passed.\",\"details\":{\"message\":\"\\\"authorization\\\" is required\",\"path\":\"authorization\",\"type\":\"any.required\",\"context\":{\"key\":\"authorization\"}},\"error_token\":\"71b3af89-ea05-42da-b940-a042dffc6737\"},\"timestamp\":1780938036253,\"evaluation_token\":null,\"entity_token\":null,\"application_token\":null,\"applic",
       "content_type": "application/json; charset=utf-8",
-      "elapsed_ms": 480,
+      "elapsed_ms": 380,
       "expected_auth_or_validation_boundary": true,
       "ok": false,
       "status": 400
@@ -394,16 +394,16 @@
     "docs": {
       "body_sample": "<!DOCTYPE html><html class=\"no-js\" lang=\"en\"><head><script type=\"text/javascript\">\n              window.storeRedirectInfo = function c(e,t){try{let i=sessionStorage.getItem(\"plaid_docs_redirect_tracking\"),s=e;if(i){let t=JSON.parse(i);t.redirectPath===e&&(s=t.originalHash)}let a={originalHash:s,redirectPath:t};sessionStorage.setItem(\"plaid_docs_redirect_tracking\",JSON.stringify(a))}catch(e){}};\n              (function d(){let e;if(window.location.href.includes(\"docs-beta\")){window.location.href=",
       "content_type": "text/html",
-      "elapsed_ms": 553,
+      "elapsed_ms": 909,
       "ok": true,
       "status": 200
     },
     "notes": "Useful for payout-account ownership and fraud reduction.",
     "provider": "Plaid Identity",
     "unauthenticated_boundary": {
-      "body_sample": "{\n  \"display_message\": null,\n  \"documentation_url\": \"https://plaid.com/docs/errors/invalid-request/#missing_fields\",\n  \"error_code\": \"MISSING_FIELDS\",\n  \"error_message\": \"the following required fields are missing: client_id, secret\",\n  \"error_type\": \"INVALID_REQUEST\",\n  \"request_id\": \"11b28b9a9db157f\",\n  \"suggested_action\": null\n}",
+      "body_sample": "{\n  \"display_message\": null,\n  \"documentation_url\": \"https://plaid.com/docs/errors/invalid-request/#missing_fields\",\n  \"error_code\": \"MISSING_FIELDS\",\n  \"error_message\": \"the following required fields are missing: client_id, secret\",\n  \"error_type\": \"INVALID_REQUEST\",\n  \"request_id\": \"e0dde2261814c74\",\n  \"suggested_action\": null\n}",
       "content_type": "application/json; charset=utf-8",
-      "elapsed_ms": 437,
+      "elapsed_ms": 537,
       "expected_auth_or_validation_boundary": true,
       "ok": false,
       "status": 400
@@ -423,16 +423,16 @@
     "docs": {
       "body_sample": "<!DOCTYPE html><html class=\"no-js\" lang=\"en\"><head><script type=\"text/javascript\">\n              window.storeRedirectInfo = function c(e,t){try{let i=sessionStorage.getItem(\"plaid_docs_redirect_tracking\"),s=e;if(i){let t=JSON.parse(i);t.redirectPath===e&&(s=t.originalHash)}let a={originalHash:s,redirectPath:t};sessionStorage.setItem(\"plaid_docs_redirect_tracking\",JSON.stringify(a))}catch(e){}};\n              (function d(){let e;if(window.location.href.includes(\"docs-beta\")){window.location.href=",
       "content_type": "text/html",
-      "elapsed_ms": 429,
+      "elapsed_ms": 816,
       "ok": true,
       "status": 200
     },
     "notes": "Useful for ACH payout setup if not relying on Stripe/Dwolla collection.",
     "provider": "Plaid Auth",
     "unauthenticated_boundary": {
-      "body_sample": "{\n  \"display_message\": null,\n  \"documentation_url\": \"https://plaid.com/docs/errors/invalid-request/#missing_fields\",\n  \"error_code\": \"MISSING_FIELDS\",\n  \"error_message\": \"the following required fields are missing: client_id, secret\",\n  \"error_type\": \"INVALID_REQUEST\",\n  \"request_id\": \"854b91f9a7cef47\",\n  \"suggested_action\": null\n}",
+      "body_sample": "{\n  \"display_message\": null,\n  \"documentation_url\": \"https://plaid.com/docs/errors/invalid-request/#missing_fields\",\n  \"error_code\": \"MISSING_FIELDS\",\n  \"error_message\": \"the following required fields are missing: client_id, secret\",\n  \"error_type\": \"INVALID_REQUEST\",\n  \"request_id\": \"500b53c530740af\",\n  \"suggested_action\": null\n}",
       "content_type": "application/json; charset=utf-8",
-      "elapsed_ms": 481,
+      "elapsed_ms": 425,
       "expected_auth_or_validation_boundary": true,
       "ok": false,
       "status": 400
@@ -452,16 +452,16 @@
     "docs": {
       "body_sample": "<!DOCTYPE html><html class=\"no-js\" lang=\"en\"><head><script type=\"text/javascript\">\n              window.storeRedirectInfo = function c(e,t){try{let i=sessionStorage.getItem(\"plaid_docs_redirect_tracking\"),s=e;if(i){let t=JSON.parse(i);t.redirectPath===e&&(s=t.originalHash)}let a={originalHash:s,redirectPath:t};sessionStorage.setItem(\"plaid_docs_redirect_tracking\",JSON.stringify(a))}catch(e){}};\n              (function d(){let e;if(window.location.href.includes(\"docs-beta\")){window.location.href=",
       "content_type": "text/html",
-      "elapsed_ms": 947,
+      "elapsed_ms": 1525,
       "ok": true,
       "status": 200
     },
     "notes": "Useful for larger/repeat grants; too intrusive for every $100 microgrant.",
     "provider": "Plaid Income",
     "unauthenticated_boundary": {
-      "body_sample": "{\n  \"display_message\": null,\n  \"documentation_url\": \"https://plaid.com/docs/errors/invalid-request/#missing_fields\",\n  \"error_code\": \"MISSING_FIELDS\",\n  \"error_message\": \"the following required fields are missing: client_id, secret\",\n  \"error_type\": \"INVALID_REQUEST\",\n  \"request_id\": \"f56ee2ce10f0f0b\",\n  \"suggested_action\": null\n}",
+      "body_sample": "{\n  \"display_message\": null,\n  \"documentation_url\": \"https://plaid.com/docs/errors/invalid-request/#missing_fields\",\n  \"error_code\": \"MISSING_FIELDS\",\n  \"error_message\": \"the following required fields are missing: client_id, secret\",\n  \"error_type\": \"INVALID_REQUEST\",\n  \"request_id\": \"3eadf47355dfc64\",\n  \"suggested_action\": null\n}",
       "content_type": "application/json; charset=utf-8",
-      "elapsed_ms": 353,
+      "elapsed_ms": 515,
       "expected_auth_or_validation_boundary": true,
       "ok": false,
       "status": 400
@@ -477,9 +477,9 @@
       "PINWHEEL_API_KEY": false
     },
     "docs": {
-      "body_sample": "<!DOCTYPE html><html lang=\"en\" style=\"\" data-color-mode=\"light\" class=\" useReactApp  \"><head><meta charset=\"utf-8\"><meta name=\"readme-deploy\" content=\"5.764.0\"><meta name=\"readme-subdomain\" content=\"pinwheelapi\"><meta name=\"readme-repo\" content=\"pinwheelapi-a35ebb176a35\"><meta name=\"readme-basepath-childProject\" content=\"public\"><meta name=\"readme-basepath-version\" content=\"v2022.0.0-03-02\"><meta name=\"readme-project-flags\" content=\"JMysRINLiGxiz4u6a9cIrA==:KgK5mVJH1q5u9P1f3KupUX/V43IL9j6eMkZVDV",
+      "body_sample": "<!DOCTYPE html><html lang=\"en\" style=\"\" data-color-mode=\"light\" class=\" useReactApp  \"><head><meta charset=\"utf-8\"><meta name=\"readme-deploy\" content=\"5.764.0\"><meta name=\"readme-subdomain\" content=\"pinwheelapi\"><meta name=\"readme-repo\" content=\"pinwheelapi-a35ebb176a35\"><meta name=\"readme-basepath-childProject\" content=\"public\"><meta name=\"readme-basepath-version\" content=\"v2022.0.0-03-02\"><meta name=\"readme-project-flags\" content=\"ynmjyh1rUquKgPTLCBbuhA==:6X9hLdk/FgfdunNTvKpUt8A73Flw+cgv2dgX89",
       "content_type": "text/html; charset=utf-8",
-      "elapsed_ms": 436,
+      "elapsed_ms": 1561,
       "ok": true,
       "status": 200
     },
@@ -488,7 +488,7 @@
     "unauthenticated_boundary": {
       "body_sample": "{\"error\":{\"type\":\"INVALID_API_VERSION\",\"code\":\"UNKNOWN_API_VERSION\",\"status_code\":400,\"message\":\"The API version specified is not recognized. Look at https://docs.getpinwheel.com/docs/api to see a list of supported API versions.\"}}",
       "content_type": "application/json",
-      "elapsed_ms": 509,
+      "elapsed_ms": 409,
       "expected_auth_or_validation_boundary": true,
       "ok": false,
       "status": 400
@@ -508,7 +508,7 @@
     "docs": {
       "body_sample": "<!DOCTYPE html>\n<html lang=\"en\" dir=\"ltr\">\n  <head>\n    <meta charset=\"utf-8\" />\n<meta name=\"Generator\" content=\"Drupal 10 (https://www.drupal.org)\" />\n<meta name=\"MobileOptimized\" content=\"width\" />\n<meta name=\"HandheldFriendly\" content=\"true\" />\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Fira+Sans:700,regular&amp;subset=latin-ext&amp;display=swap\" media=\"all\" />\n<style>div#sliding-popup, div#slid",
       "content_type": "text/html; charset=UTF-8",
-      "elapsed_ms": 849,
+      "elapsed_ms": 953,
       "ok": true,
       "status": 200
     },
