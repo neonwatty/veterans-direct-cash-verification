@@ -44,6 +44,37 @@ Outputs are written to `reports/`.
 
 Credentialed probes can be added by exporting the variables in `.env.example`; the script is structured so deeper checks can be added without changing the matrix format.
 
+## Run the TypeScript Claims Benchmark
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run tests and type checks:
+
+```bash
+npm test
+npm run typecheck
+```
+
+Generate deterministic fixture extractions:
+
+```bash
+mkdir -p reports/extractions
+npm run extract -- fixtures/source-documents/va-civil-service-letter-sample.pdf --output reports/extractions/va-civil-service-letter-sample.claims.json
+npm run extract -- fixtures/source-documents/statement-of-service-sample.pdf --output reports/extractions/statement-of-service-sample.claims.json
+npm run extract -- fixtures/source-documents/ngb22-example-nd.pdf --output reports/extractions/ngb22-example-nd.claims.json
+npm run evaluate
+```
+
+Run a live OpenAI vision extraction once `OPENAI_API_KEY` is available:
+
+```bash
+npm run extract -- fixtures/source-documents/statement-of-service-sample.pdf --provider openai --image fixtures/rendered-pages/statement-of-service-sample.pdf.png
+```
+
 ## Important Limitation
 
 Many target APIs are partner-gated. A failed unauthenticated probe does not mean an API is unusable; it means we have confirmed that production automation requires a vendor contract, API key, OAuth client, VA approval, or a similar access path.

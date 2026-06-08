@@ -297,14 +297,25 @@ Suggested metrics:
 - Public samples may accidentally include real PII.
 - Fraud detection cannot rely on OCR alone.
 
+## Current TypeScript Benchmark
+
+The repo now includes a TypeScript benchmark harness:
+
+- `scripts/extract-claims.ts`: extracts claims with `--provider fixture` or `--provider openai`.
+- `scripts/evaluate-claims.ts`: compares generated claim JSON files against `fixtures/expected-claims.json`.
+- `src/evaluate.ts`: catches missed expected fields, forbidden over-inference, and missed human-review routing.
+- `src/providers/openai.ts`: OpenAI Responses API vision provider using rendered fixture pages and strict JSON parsing.
+
+The fixture provider is deterministic and exists to test the evaluator/output path. The OpenAI provider is the first real model-backed extraction path, but requires `OPENAI_API_KEY`.
+
 ## Immediate Next Step
 
-Build a small extraction benchmark:
+Run live model extraction and compare it against the expected claims:
 
 - Input: the three fixture PDFs.
 - Output: normalized JSON.
-- Method A: conventional OCR only.
-- Method B: vision LLM only.
+- Method A: vision LLM only.
+- Method B: conventional OCR only.
 - Method C: OCR text + vision LLM.
 - Success: correct extraction without over-claiming veteran status, service duration, or disability details.
 

@@ -1,0 +1,23 @@
+{
+  "document_type": "va_civil_service_letter",
+  "extraction_confidence": "high",
+  "needs_human_review": false,
+  "review_reasons": [],
+  "subject": {
+    "subject_name": "Joe B. Veteran"
+  },
+  "service": {
+    "service_periods_present": false,
+    "character_of_service": "honorable",
+    "active_duty_supported": true,
+    "service_connected_disability": "yes"
+  },
+  "benefits": {
+    "rating_threshold": "30_percent_or_more"
+  },
+  "derived": {
+    "issuer": "Department of Veterans Affairs",
+    "document_date": "2014-04-09",
+    "veteran_status_supported": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "document_type": "statement_of_service",
+  "extraction_confidence": "high",
+  "needs_human_review": true,
+  "review_reasons": [
+    "fixture requires review"
+  ],
+  "subject": {
+    "subject_name": "JOE, GI"
+  },
+  "service": {
+    "rank_or_pay_grade": "E-6",
+    "branch": "Army",
+    "active_duty_service_date": "1918-05-02",
+    "expected_discharge_or_release_date": "2026-02-05",
+    "expected_character_of_discharge": "honorable",
+    "current_service_supported": true
+  },
+  "benefits": {},
+  "derived": {
+    "issuer": "Department of the Army",
+    "document_date": "2025-12-17",
+    "completed_veteran_status_supported": false
+  }
+}

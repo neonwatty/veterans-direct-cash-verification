@@ -1,0 +1,17 @@
+{
+  "name": "veterans-direct-cash-verification",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "test": "node --test --import tsx tests/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "extract": "tsx scripts/extract-claims.ts",
+    "evaluate": "tsx scripts/evaluate-claims.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.0"
+  }
+}

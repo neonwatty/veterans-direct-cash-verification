@@ -1,0 +1,20 @@
+{
+  "document_type": "ngb22",
+  "extraction_confidence": "high",
+  "needs_human_review": true,
+  "review_reasons": [
+    "fixture requires review"
+  ],
+  "subject": {},
+  "service": {
+    "record_of_service_net_years": 6,
+    "record_of_service_net_months": 0,
+    "record_of_service_net_days": 0,
+    "character_of_service": "honorable",
+    "guard_service_supported": true
+  },
+  "benefits": {},
+  "derived": {
+    "issuer": "National Guard"
+  }
+}
