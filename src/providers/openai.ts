@@ -8,6 +8,31 @@ export interface OpenAiExtractionOptions {
   imagePaths: string[];
 }
 
+export interface OpenAiRequestBodyOptions {
+  model: string;
+  prompt: string;
+  imageDataUrls: string[];
+}
+
+export interface OpenAiDryRunSummaryOptions {
+  model: string;
+  documentPath: string;
+  imagePaths: string[];
+  outputPath?: string;
+}
+
+export interface OpenAiDryRunSummary {
+  provider: "openai";
+  endpoint: "https://api.openai.com/v1/responses";
+  model: string;
+  documentPath: string;
+  imagePaths: string[];
+  outputPath: string | null;
+  store: false;
+  liveCallWouldSendImages: true;
+  liveCallRequiresApiKey: true;
+}
+
 export function buildOpenAiExtractionPrompt(): string {
   return [
     "Extract only facts explicitly visible in the document.",
@@ -17,6 +42,51 @@ export function buildOpenAiExtractionPrompt(): string {
     "Use null or unknown when a field is absent or unreadable.",
     "Flag human review when the document is a sample, fields are blank, the subject name is missing, or a claim depends on interpretation."
   ].join("\n");
+}
+
+export function buildOpenAiRequestBody(options: OpenAiRequestBodyOptions): Record<string, unknown> {
+  return {
+    model: options.model,
+    store: false,
+    input: [
+      {
+        role: "user",
+        content: [
+          { type: "input_text", text: options.prompt },
+          ...options.imageDataUrls.map((imageUrl) => ({
+            type: "input_image",
+            image_url: imageUrl
+          }))
+        ]
+      }
+    ]
+  };
+}
+
+export function buildOpenAiDryRunSummary(options: OpenAiDryRunSummaryOptions): OpenAiDryRunSummary {
+  return {
+    provider: "openai",
+    endpoint: "https://api.openai.com/v1/responses",
+    model: options.model,
+    documentPath: options.documentPath,
+    imagePaths: options.imagePaths,
+    outputPath: options.outputPath ?? null,
+    store: false,
+    liveCallWouldSendImages: true,
+    liveCallRequiresApiKey: true
+  };
+}
+
+export function assertFixtureOnlyPath(filePath: string, label: "document" | "image" | "output"): void {
+  const normalized = normalizePath(filePath);
+  const allowed = label === "output"
+    ? normalized.startsWith("reports/extractions/openai/")
+    : normalized.startsWith("fixtures/");
+
+  if (!allowed) {
+    const allowedRoot = label === "output" ? "reports/extractions/openai/" : "fixtures/";
+    throw new Error(`Refusing to use non-fixture ${label} path: ${filePath}. Expected path under ${allowedRoot}`);
+  }
 }
 
 export function parseOpenAiJsonResponse(outputText: string): ExtractedClaims {
@@ -36,11 +106,13 @@ export async function extractClaimsWithOpenAi(
 
   const model = options.model ?? process.env.OPENAI_MODEL ?? "gpt-4.1-mini";
   const imageContent = await Promise.all(
-    options.imagePaths.map(async (imagePath) => ({
-      type: "input_image",
-      image_url: await toDataUrl(imagePath)
-    }))
+    options.imagePaths.map((imagePath) => toDataUrl(imagePath))
   );
+  const body = buildOpenAiRequestBody({
+    model,
+    prompt: buildOpenAiExtractionPrompt(),
+    imageDataUrls: imageContent
+  });
 
   const response = await fetch("https://api.openai.com/v1/responses", {
     method: "POST",
@@ -48,18 +120,7 @@ export async function extractClaimsWithOpenAi(
       "Authorization": `Bearer ${apiKey}`,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({
-      model,
-      input: [
-        {
-          role: "user",
-          content: [
-            { type: "input_text", text: buildOpenAiExtractionPrompt() },
-            ...imageContent
-          ]
-        }
-      ]
-    })
+    body: JSON.stringify(body)
   });
 
   if (!response.ok) {
@@ -99,4 +160,8 @@ function extractOutputText(output: unknown): string | undefined {
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function normalizePath(value: string): string {
+  return value.replaceAll("\\", "/").replace(/^\.\//, "");
 }

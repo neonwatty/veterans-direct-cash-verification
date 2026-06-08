@@ -1,0 +1,212 @@
+version: 2
+active_task: T999
+agents:
+  scout: installed
+  worker: installed
+  judge: installed
+goal:
+  slug: openai-vision-readiness
+  title: OpenAI Vision Extraction Readiness
+  status: active
+  mode: specific
+  created_at: "2026-06-08"
+  owner_request: "Plan this out with GoalBuddy prep before providing an API key."
+  oracle:
+    type: test_artifact_review
+    signal: "Guarded dry-run and local verification commands prove OpenAI fixture extraction is safe to run before a key is provided."
+    final_proof: "Final Judge audit maps passing npm test, npm run typecheck, npm run evaluate, dry-run output, fixture-only guardrails, and docs to the original readiness request."
+    description: "npm test, npm run typecheck, npm run evaluate, dry-run OpenAI command, fixture-only guardrails, and final audit prove the benchmark is safe to run with a key."
+  intake:
+    original_request: "plan this out with goalbuddy prep"
+    interpreted_outcome: "Prepare a GoalBuddy board to make OpenAI vision extraction safe and ready before the user provides an API key."
+    input_shape: specific
+    authority: requested
+    proof_type: test_artifact_review
+    completion_proof: "Receipt-backed final audit showing dry-run and local verification passed without live API use."
+  likely_misfire: "Running a live model call before guardrails exist, or treating a provider scaffold as safe readiness."
+tasks:
+  - id: T001
+    type: scout
+    assignee: Scout
+    status: done
+    objective: "Inspect the current TypeScript OpenAI extraction path and identify concrete safety/readiness gaps before live API use."
+    inputs:
+      - "docs/goals/openai-vision-readiness/goal.md"
+      - "scripts/extract-claims.ts"
+      - "src/providers/openai.ts"
+      - "fixtures/README.md"
+      - "README.md"
+    constraints:
+      - "Read-only task."
+      - "Do not call OpenAI."
+      - "Do not request or use API keys."
+    expected_output:
+      - "List of readiness gaps."
+      - "Recommended guardrails."
+      - "Suggested Worker scope with allowed files and verification commands."
+    receipt:
+      result: done
+      summary: "Inspected the TypeScript OpenAI extraction path. Current scaffold can call OpenAI, but is not yet ready for a user key because it lacks dry-run mode, fixture-only enforcement, safe request summaries, store:false, dedicated OpenAI output guidance, and tests for those guardrails."
+      evidence:
+        - "src/providers/openai.ts currently sends data URLs to the Responses API and requires OPENAI_API_KEY."
+        - "scripts/extract-claims.ts currently accepts arbitrary document/image paths and has no --dry-run option."
+        - "README.md currently documents a live OpenAI command but not readiness guardrails."
+        - "fixtures/README.md defines safe fixture boundaries that should be enforced by the CLI."
+      recommended_guardrails:
+        - "Add --dry-run for openai provider that prints provider/model/document/image/output metadata without base64 or secrets."
+        - "Reject non-fixture document and image paths by default for openai provider."
+        - "Set store:false on OpenAI Responses API requests."
+        - "Route/docs live OpenAI outputs under reports/extractions/openai/."
+        - "Add tests for dry-run, fixture-only rejection, prompt safety, and store:false request construction."
+      suggested_worker_scope:
+        allowed_files:
+          - "scripts/extract-claims.ts"
+          - "src/providers/openai.ts"
+          - "src/**/*.ts"
+          - "tests/**/*.test.ts"
+          - "README.md"
+          - "docs/verified-claims-pipeline-plan.md"
+        verify:
+          - "npm test"
+          - "npm run typecheck"
+          - "npm run evaluate"
+          - "npm run extract -- fixtures/source-documents/statement-of-service-sample.pdf --provider openai --image fixtures/rendered-pages/statement-of-service-sample.pdf.png --dry-run"
+  - id: T002
+    type: judge
+    assignee: Judge
+    status: done
+    objective: "Approve the smallest complete Worker slice that makes live OpenAI fixture extraction safe enough to request a key."
+    inputs:
+      - "T001 receipt"
+      - "Current repo status"
+      - "docs/goals/openai-vision-readiness/goal.md"
+    constraints:
+      - "Read-only task."
+      - "Do not call OpenAI."
+    expected_output:
+      - "Decision: approved | revise | blocked"
+      - "Exact Worker objective"
+      - "allowed_files"
+      - "verify"
+      - "stop_if"
+    receipt:
+      result: done
+      decision: approved
+      full_outcome_complete: false
+      rationale: "The readiness gaps are concrete and the Worker slice is bounded to TypeScript guardrails/docs/tests. Verification can prove safety without using an OpenAI key."
+      worker_objective: "Implement fixture-only OpenAI readiness guardrails, dry-run behavior, no-secret request summaries, store:false request construction, dedicated OpenAI output guidance, and tests."
+      allowed_files:
+        - "scripts/extract-claims.ts"
+        - "src/providers/openai.ts"
+        - "src/**/*.ts"
+        - "tests/**/*.test.ts"
+        - "README.md"
+        - "docs/verified-claims-pipeline-plan.md"
+        - ".gitignore"
+        - "package.json"
+        - "package-lock.json"
+      verify:
+        - "npm test"
+        - "npm run typecheck"
+        - "npm run evaluate"
+        - "npm run extract -- fixtures/source-documents/statement-of-service-sample.pdf --provider openai --image fixtures/rendered-pages/statement-of-service-sample.pdf.png --dry-run"
+      stop_if:
+        - "Need to call OpenAI before guardrails are in place."
+        - "Need to process non-fixture documents."
+        - "Verification cannot prove dry-run avoids secrets/base64."
+  - id: T003
+    type: worker
+    assignee: Worker
+    status: done
+    objective: "Implement fixture-only OpenAI readiness guardrails, dry-run behavior, no-secret logging, and documentation."
+    allowed_files:
+      - "scripts/extract-claims.ts"
+      - "src/providers/openai.ts"
+      - "src/**/*.ts"
+      - "tests/**/*.test.ts"
+      - "tests/openai-provider.test.ts"
+      - "README.md"
+      - "docs/verified-claims-pipeline-plan.md"
+      - ".gitignore"
+      - "package.json"
+      - "package-lock.json"
+    constraints:
+      - "Do not call OpenAI."
+      - "Do not add real veteran documents."
+      - "Do not commit secrets."
+      - "Preserve TypeScript benchmark behavior."
+    verify:
+      - "npm test"
+      - "npm run typecheck"
+      - "npm run evaluate"
+      - "npm run extract -- fixtures/source-documents/statement-of-service-sample.pdf --provider openai --image fixtures/rendered-pages/statement-of-service-sample.pdf.png --dry-run"
+    stop_if:
+      - "A required change needs files outside allowed_files."
+      - "OpenAI must be called to verify the change."
+      - "Verification fails twice for the same reason."
+      - "Fixture-only guardrail behavior is ambiguous."
+    receipt:
+      result: done
+      changed_files:
+        - "scripts/extract-claims.ts"
+        - "src/providers/openai.ts"
+        - "tests/openai-provider.test.ts"
+        - "README.md"
+        - "docs/verified-claims-pipeline-plan.md"
+      commands:
+        - cmd: "npm test"
+          status: pass
+        - cmd: "npm run typecheck"
+          status: pass
+        - cmd: "npm run evaluate"
+          status: pass
+        - cmd: "npm run extract -- fixtures/source-documents/statement-of-service-sample.pdf --provider openai --image fixtures/rendered-pages/statement-of-service-sample.pdf.png --dry-run"
+          status: pass
+      summary: "Implemented OpenAI readiness guardrails: dry-run mode, fixture-only input checks, OpenAI output path restriction, store:false request construction, no-secret/no-base64 dry-run summaries, and documentation for the safer live workflow."
+  - id: T004
+    type: worker
+    assignee: Worker
+    status: blocked
+    objective: "After the user provides OPENAI_API_KEY, run one live fixture-only OpenAI extraction and evaluate the result without committing secrets."
+    allowed_files:
+      - "reports/extractions/openai/**"
+      - "reports/**/*.md"
+      - "docs/goals/openai-vision-readiness/state.yaml"
+    constraints:
+      - "Only run against existing fixture rendered pages."
+      - "Never print or commit the API key."
+      - "Do not process non-fixture documents."
+      - "If the live result contains surprising PII or over-inference, record it as a finding instead of broadening scope."
+    verify:
+      - "npm run extract -- fixtures/source-documents/statement-of-service-sample.pdf --provider openai --image fixtures/rendered-pages/statement-of-service-sample.pdf.png --output reports/extractions/openai/statement-of-service-sample.claims.json"
+      - "npm run evaluate fixtures/expected-claims.json reports/extractions/openai"
+    stop_if:
+      - "OPENAI_API_KEY is unavailable."
+      - "The model response is not valid JSON."
+      - "The model over-infers forbidden claims."
+      - "The command would send a non-fixture file."
+    receipt:
+      result: blocked
+      summary: "Live OpenAI fixture extraction requires OPENAI_API_KEY, which is not present in the shell. This is intentionally not required for the pre-key readiness tranche."
+      evidence:
+        - "OPENAI_API_KEY_missing"
+      unblock_when:
+        - "User provides OPENAI_API_KEY in the environment for a future live fixture-only run."
+  - id: T999
+    type: judge
+    assignee: Judge
+    status: active
+    objective: "Audit whether the readiness tranche is complete and whether it is appropriate to proceed with user-provided API key testing."
+    inputs:
+      - "All task receipts"
+      - "Latest verification command outputs"
+      - "Current git status"
+    constraints:
+      - "Read-only task."
+      - "Do not call OpenAI unless T004 completed and supplied evidence."
+    expected_output:
+      - "complete | not_complete"
+      - "full_outcome_complete: true | false"
+      - "Missing evidence, if any"
+      - "Next task if not complete"
+    receipt: null

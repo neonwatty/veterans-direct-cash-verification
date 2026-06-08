@@ -69,7 +69,13 @@ npm run extract -- fixtures/source-documents/ngb22-example-nd.pdf --output repor
 npm run evaluate
 ```
 
-Run a live OpenAI vision extraction once `OPENAI_API_KEY` is available:
+Dry-run the OpenAI request shape before providing an API key. This does not call OpenAI and does not print image base64 or secrets:
+
+```bash
+npm run extract -- fixtures/source-documents/statement-of-service-sample.pdf --provider openai --image fixtures/rendered-pages/statement-of-service-sample.pdf.png --dry-run
+```
+
+Run a live OpenAI vision extraction once `OPENAI_API_KEY` is available. By default, OpenAI outputs are written under `reports/extractions/openai/`, and OpenAI input/output paths are fixture-restricted:
 
 ```bash
 npm run extract -- fixtures/source-documents/statement-of-service-sample.pdf --provider openai --image fixtures/rendered-pages/statement-of-service-sample.pdf.png

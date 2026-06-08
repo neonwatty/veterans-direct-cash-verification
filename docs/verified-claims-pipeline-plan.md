@@ -306,7 +306,15 @@ The repo now includes a TypeScript benchmark harness:
 - `src/evaluate.ts`: catches missed expected fields, forbidden over-inference, and missed human-review routing.
 - `src/providers/openai.ts`: OpenAI Responses API vision provider using rendered fixture pages and strict JSON parsing.
 
-The fixture provider is deterministic and exists to test the evaluator/output path. The OpenAI provider is the first real model-backed extraction path, but requires `OPENAI_API_KEY`.
+The fixture provider is deterministic and exists to test the evaluator/output path. The OpenAI provider is the first real model-backed extraction path, but requires `OPENAI_API_KEY` for live calls.
+
+OpenAI readiness guardrails:
+
+- `--dry-run` prints request shape without sending images, base64, or secrets.
+- OpenAI document and image inputs must live under `fixtures/`.
+- OpenAI outputs must live under `reports/extractions/openai/`.
+- OpenAI Responses API requests include `store: false`.
+- The live OpenAI command defaults output to `reports/extractions/openai/<fixture>.claims.json`.
 
 ## Immediate Next Step
 
