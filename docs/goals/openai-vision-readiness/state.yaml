@@ -1,5 +1,5 @@
 version: 2
-active_task: T999
+active_task: null
 agents:
   scout: installed
   worker: installed
@@ -7,7 +7,7 @@ agents:
 goal:
   slug: openai-vision-readiness
   title: OpenAI Vision Extraction Readiness
-  status: active
+  status: done
   mode: specific
   created_at: "2026-06-08"
   owner_request: "Plan this out with GoalBuddy prep before providing an API key."
@@ -195,7 +195,7 @@ tasks:
   - id: T999
     type: judge
     assignee: Judge
-    status: active
+    status: done
     objective: "Audit whether the readiness tranche is complete and whether it is appropriate to proceed with user-provided API key testing."
     inputs:
       - "All task receipts"
@@ -209,4 +209,20 @@ tasks:
       - "full_outcome_complete: true | false"
       - "Missing evidence, if any"
       - "Next task if not complete"
-    receipt: null
+    receipt:
+      result: done
+      decision: complete
+      full_outcome_complete: true
+      summary: "The pre-key readiness tranche is complete. The OpenAI path now has fixture-only guardrails, dry-run request-shape output, no-secret/no-base64 summaries, store:false request construction, default OpenAI output path under reports/extractions/openai/, and updated docs."
+      evidence:
+        - "npm test: pass"
+        - "npm run typecheck: pass"
+        - "npm run evaluate: pass"
+        - "OpenAI dry-run command: pass; printed provider/model/path/store metadata without secrets or base64."
+        - "Negative non-fixture dry-run: pass; refused /tmp/private-dd214.pdf before any key was required."
+        - "GoalBuddy checker: pass after board repair."
+        - "Pushed commit d5a4854 Prepare OpenAI vision extraction for API key."
+      missing_evidence:
+        - "Live OpenAI extraction was not run because OPENAI_API_KEY is not present; this is outside the pre-key readiness tranche."
+      next_step:
+        - "When the user provides OPENAI_API_KEY, run the fixture-only live extraction command and evaluate reports/extractions/openai/statement-of-service-sample.claims.json."
