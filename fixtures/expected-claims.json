@@ -1,0 +1,70 @@
+{
+  "fixtures": [
+    {
+      "file": "fixtures/source-documents/va-civil-service-letter-sample.pdf",
+      "document_type": "va_civil_service_letter",
+      "expected": {
+        "issuer": "Department of Veterans Affairs",
+        "document_date": "2014-04-09",
+        "subject_name": "Joe B. Veteran",
+        "veteran_status_supported": true,
+        "service_periods_present": false,
+        "character_of_service": "honorable",
+        "active_duty_supported": true,
+        "service_connected_disability": "yes",
+        "rating_threshold": "30_percent_or_more"
+      },
+      "must_flag_human_review": false,
+      "must_not_infer": [
+        "service_start_date",
+        "service_end_date",
+        "total_service_years",
+        "deployment_count",
+        "combat_status"
+      ]
+    },
+    {
+      "file": "fixtures/source-documents/statement-of-service-sample.pdf",
+      "document_type": "statement_of_service",
+      "expected": {
+        "issuer": "Department of the Army",
+        "document_date": "2025-12-17",
+        "subject_name": "JOE, GI",
+        "rank_or_pay_grade": "E-6",
+        "branch": "Army",
+        "active_duty_service_date": "1918-05-02",
+        "expected_discharge_or_release_date": "2026-02-05",
+        "expected_character_of_discharge": "honorable",
+        "current_service_supported": true,
+        "completed_veteran_status_supported": false
+      },
+      "must_flag_human_review": true,
+      "must_not_infer": [
+        "completed_discharge",
+        "veteran_status_verified",
+        "total_service_years",
+        "deployment_count",
+        "combat_status"
+      ]
+    },
+    {
+      "file": "fixtures/source-documents/ngb22-example-nd.pdf",
+      "document_type": "ngb22",
+      "expected": {
+        "issuer": "National Guard",
+        "record_of_service_net_years": 6,
+        "record_of_service_net_months": 0,
+        "record_of_service_net_days": 0,
+        "character_of_service": "honorable",
+        "guard_service_supported": true
+      },
+      "must_flag_human_review": true,
+      "must_not_infer": [
+        "federal_active_duty_status",
+        "deployment_count",
+        "combat_status",
+        "va_disability_rating"
+      ]
+    }
+  ]
+}
