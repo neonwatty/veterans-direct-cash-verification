@@ -81,6 +81,16 @@ Run a live OpenAI vision extraction once `OPENAI_API_KEY` is available. By defau
 npm run extract -- fixtures/source-documents/statement-of-service-sample.pdf --provider openai --image fixtures/rendered-pages/statement-of-service-sample.pdf.png
 ```
 
+Evaluate all OpenAI fixture outputs:
+
+```bash
+npm run evaluate fixtures/expected-claims.json reports/extractions/openai
+```
+
+Latest OpenAI fixture benchmark report:
+
+- `reports/openai-fixture-benchmark-20260608.md`
+
 ## Important Limitation
 
 Many target APIs are partner-gated. A failed unauthenticated probe does not mean an API is unusable; it means we have confirmed that production automation requires a vendor contract, API key, OAuth client, VA approval, or a similar access path.

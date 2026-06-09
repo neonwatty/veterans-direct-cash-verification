@@ -99,3 +99,64 @@ test("normalizes OpenAI statement-of-service claims and forces human review", ()
   assert.equal(normalized.service?.expected_character_of_discharge, "honorable");
   assert.equal(normalized.derived?.completed_veteran_status_supported, false);
 });
+
+test("normalizes VA civil-service letter benefit and status claims", () => {
+  const normalized = normalizeExtractedClaims({
+    document_type: "va_civil_service_letter",
+    extraction_confidence: "high",
+    needs_human_review: false,
+    review_reasons: [],
+    subject: {
+      subject_name: "Joe B. Veteran",
+      date_of_birth: null
+    },
+    service: {
+      expected_character_of_discharge: "honorable_conditions",
+      character_of_service: "honorable_conditions",
+      active_duty_supported: true,
+      service_connected_disability: "at least 30 percent or more disabling",
+      service_periods_present: null
+    },
+    benefits: {
+      rating_threshold: "at least 30 percent or more disabling"
+    },
+    derived: {
+      issuer: "DEPARTMENT OF VETERANS AFFAIRS",
+      document_date: "April 09, 2014",
+      veteran_status_supported: null
+    }
+  });
+
+  assert.equal(normalized.derived?.issuer, "Department of Veterans Affairs");
+  assert.equal(normalized.derived?.document_date, "2014-04-09");
+  assert.equal(normalized.derived?.veteran_status_supported, true);
+  assert.equal(normalized.service?.service_periods_present, false);
+  assert.equal(normalized.service?.character_of_service, "honorable");
+  assert.equal(normalized.service?.service_connected_disability, "yes");
+  assert.equal(normalized.benefits?.rating_threshold, "30_percent_or_more");
+});
+
+test("normalizes NGB-22 sample annotations into benchmark claims", () => {
+  const normalized = normalizeExtractedClaims({
+    document_type: "ngb22",
+    extraction_confidence: "high",
+    needs_human_review: true,
+    review_reasons: [],
+    subject: {},
+    service: {
+      character_of_service: "must_be_honorable",
+      record_of_service_net_years: 6,
+      record_of_service_net_months: 0,
+      record_of_service_net_days: 0,
+      guard_service_supported: null
+    },
+    benefits: {},
+    derived: {
+      issuer: null
+    }
+  });
+
+  assert.equal(normalized.derived?.issuer, "National Guard");
+  assert.equal(normalized.service?.character_of_service, "honorable");
+  assert.equal(normalized.service?.guard_service_supported, true);
+});

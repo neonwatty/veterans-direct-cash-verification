@@ -19,7 +19,7 @@
     "completed_discharge": null,
     "veteran_status_verified": null,
     "completed_veteran_status_supported": false,
-    "service_periods_present": true,
+    "service_periods_present": null,
     "character_of_service": null,
     "active_duty_supported": true,
     "service_connected_disability": null,

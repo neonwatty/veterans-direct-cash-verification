@@ -315,10 +315,15 @@ function normalizeDerived(claims: ExtractedClaims): void {
   const issuer = claims.derived.issuer;
   if (typeof issuer === "string") {
     claims.derived.issuer = normalizeIssuer(issuer);
+  } else if (claims.document_type === "ngb22") {
+    claims.derived.issuer = "National Guard";
   }
   const documentDate = claims.derived.document_date;
   if (typeof documentDate === "string") {
     claims.derived.document_date = normalizeDate(documentDate);
+  }
+  if (claims.document_type === "va_civil_service_letter" && claims.service?.active_duty_supported === true) {
+    claims.derived.veteran_status_supported = true;
   }
 }
 
@@ -338,6 +343,18 @@ function normalizeService(claims: ExtractedClaims): void {
   }
   if (typeof service.character_of_service === "string") {
     service.character_of_service = normalizeCharacter(service.character_of_service);
+  }
+  if (claims.document_type === "va_civil_service_letter") {
+    service.service_periods_present = false;
+  }
+  if (typeof service.service_connected_disability === "string") {
+    service.service_connected_disability = normalizeServiceConnectedDisability(service.service_connected_disability);
+  }
+  if (claims.document_type === "ngb22" && hasRecordOfService(service)) {
+    service.guard_service_supported = true;
+  }
+  if (claims.benefits && typeof claims.benefits.rating_threshold === "string") {
+    claims.benefits.rating_threshold = normalizeRatingThreshold(claims.benefits.rating_threshold);
   }
 }
 
@@ -384,7 +401,11 @@ function normalizeBranch(value: string): string {
 }
 
 function normalizeCharacter(value: string): string {
-  return value.trim().toLowerCase().replaceAll(/\s+/g, "_");
+  const normalized = value.trim().toLowerCase().replaceAll(/\s+/g, "_");
+  if (normalized === "honorable_conditions" || normalized === "must_be_honorable") {
+    return "honorable";
+  }
+  return normalized;
 }
 
 function normalizeDate(value: string): string {
@@ -404,7 +425,37 @@ function normalizeDate(value: string): string {
     }
   }
 
+  const commaTextMatch = trimmed.match(/^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
+  if (commaTextMatch) {
+    const [, monthName, day, year] = commaTextMatch;
+    const month = monthNumber(monthName);
+    if (month) {
+      return `${year}-${month}-${day.padStart(2, "0")}`;
+    }
+  }
+
   return trimmed;
+}
+
+function normalizeServiceConnectedDisability(value: string): string {
+  const lower = value.toLowerCase();
+  return lower.includes("service-connected") || (lower.includes("30") && lower.includes("disabling"))
+    ? "yes"
+    : value;
+}
+
+function normalizeRatingThreshold(value: string): string {
+  const lower = value.toLowerCase();
+  if (lower.includes("30") && lower.includes("percent")) {
+    return "30_percent_or_more";
+  }
+  return value;
+}
+
+function hasRecordOfService(service: Record<string, unknown>): boolean {
+  return typeof service.record_of_service_net_years === "number" ||
+    typeof service.record_of_service_net_months === "number" ||
+    typeof service.record_of_service_net_days === "number";
 }
 
 function monthNumber(monthName: string): string | undefined {

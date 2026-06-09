@@ -1,0 +1,46 @@
+{
+  "document_type": "ngb22",
+  "extraction_confidence": "high",
+  "needs_human_review": true,
+  "review_reasons": [
+    "subject name missing",
+    "fields blank",
+    "claim depends on interpretation"
+  ],
+  "subject": {
+    "subject_name": null,
+    "date_of_birth": null
+  },
+  "service": {
+    "branch": "National Guard",
+    "rank_or_pay_grade": null,
+    "active_duty_service_date": null,
+    "expected_discharge_or_release_date": null,
+    "expected_character_of_discharge": "honorable",
+    "current_service_supported": null,
+    "completed_discharge": null,
+    "veteran_status_verified": null,
+    "completed_veteran_status_supported": null,
+    "service_periods_present": null,
+    "character_of_service": "honorable",
+    "active_duty_supported": null,
+    "service_connected_disability": null,
+    "record_of_service_net_years": 6,
+    "record_of_service_net_months": 0,
+    "record_of_service_net_days": 0,
+    "guard_service_supported": true,
+    "federal_active_duty_status": null,
+    "deployment_count": null,
+    "combat_status": null,
+    "va_disability_rating": null
+  },
+  "benefits": {
+    "rating_threshold": null
+  },
+  "derived": {
+    "issuer": "National Guard",
+    "document_date": null,
+    "veteran_status_supported": null,
+    "completed_veteran_status_supported": null
+  }
+}
