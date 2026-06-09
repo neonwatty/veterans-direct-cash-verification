@@ -1,0 +1,44 @@
+{
+  "document_type": "statement_of_service",
+  "extraction_confidence": "high",
+  "needs_human_review": true,
+  "review_reasons": [
+    "current service or expected discharge document requires human review"
+  ],
+  "subject": {
+    "subject_name": "SSG JOE GI",
+    "date_of_birth": "01/01/1902"
+  },
+  "service": {
+    "branch": "Army",
+    "rank_or_pay_grade": "E-6",
+    "active_duty_service_date": "1918-05-02",
+    "expected_discharge_or_release_date": "2026-02-05",
+    "expected_character_of_discharge": "honorable",
+    "current_service_supported": true,
+    "completed_discharge": null,
+    "veteran_status_verified": null,
+    "completed_veteran_status_supported": false,
+    "service_periods_present": null,
+    "character_of_service": null,
+    "active_duty_supported": true,
+    "service_connected_disability": null,
+    "record_of_service_net_years": null,
+    "record_of_service_net_months": null,
+    "record_of_service_net_days": null,
+    "guard_service_supported": null,
+    "federal_active_duty_status": null,
+    "deployment_count": null,
+    "combat_status": null,
+    "va_disability_rating": null
+  },
+  "benefits": {
+    "rating_threshold": null
+  },
+  "derived": {
+    "issuer": "Department of the Army",
+    "document_date": "2025-12-17",
+    "veteran_status_supported": null,
+    "completed_veteran_status_supported": false
+  }
+}

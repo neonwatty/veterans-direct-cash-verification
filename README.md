@@ -85,11 +85,13 @@ Evaluate all OpenAI fixture outputs:
 
 ```bash
 npm run evaluate fixtures/expected-claims.json reports/extractions/openai
+npm run benchmark -- --expected fixtures/expected-claims.json --dir reports/extractions/openai --out reports/openai-fixture-benchmark-latest.md
 ```
 
 Latest OpenAI fixture benchmark report:
 
 - `reports/openai-fixture-benchmark-20260608.md`
+- `reports/openai-fixture-benchmark-latest.md`
 
 ## Important Limitation
 

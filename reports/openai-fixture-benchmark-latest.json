@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "generated_at": "2026-06-09T01:07:07.080Z",
+  "expectedPath": "fixtures/expected-claims.json",
+  "extractionDir": "reports/extractions/openai",
+  "results": [
+    {
+      "file": "fixtures/source-documents/va-civil-service-letter-sample.pdf",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "file": "fixtures/source-documents/statement-of-service-sample.pdf",
+      "passed": true,
+      "failures": []
+    },
+    {
+      "file": "fixtures/source-documents/ngb22-example-nd.pdf",
+      "passed": true,
+      "failures": []
+    }
+  ]
+}
