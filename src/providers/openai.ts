@@ -48,6 +48,14 @@ export function buildOpenAiRequestBody(options: OpenAiRequestBodyOptions): Recor
   return {
     model: options.model,
     store: false,
+    text: {
+      format: {
+        type: "json_schema",
+        name: "verified_veteran_claims",
+        strict: true,
+        schema: extractedClaimsJsonSchema()
+      }
+    },
     input: [
       {
         role: "user",
@@ -60,6 +68,125 @@ export function buildOpenAiRequestBody(options: OpenAiRequestBodyOptions): Recor
         ]
       }
     ]
+  };
+}
+
+function extractedClaimsJsonSchema(): Record<string, unknown> {
+  const nullableString = { anyOf: [{ type: "string" }, { type: "null" }] };
+  const nullableNumber = { anyOf: [{ type: "number" }, { type: "null" }] };
+  const nullableBoolean = { anyOf: [{ type: "boolean" }, { type: "null" }] };
+
+  return {
+    type: "object",
+    additionalProperties: false,
+    required: [
+      "document_type",
+      "extraction_confidence",
+      "needs_human_review",
+      "review_reasons",
+      "subject",
+      "service",
+      "benefits",
+      "derived"
+    ],
+    properties: {
+      document_type: {
+        enum: [
+          "va_civil_service_letter",
+          "va_benefit_summary_letter",
+          "statement_of_service",
+          "dd214",
+          "ngb22",
+          "unknown"
+        ]
+      },
+      extraction_confidence: { enum: ["high", "medium", "low"] },
+      needs_human_review: { type: "boolean" },
+      review_reasons: { type: "array", items: { type: "string" } },
+      subject: {
+        type: "object",
+        additionalProperties: false,
+        required: ["subject_name", "date_of_birth"],
+        properties: {
+          subject_name: nullableString,
+          date_of_birth: nullableString
+        }
+      },
+      service: {
+        type: "object",
+        additionalProperties: false,
+        required: [
+          "branch",
+          "rank_or_pay_grade",
+          "active_duty_service_date",
+          "expected_discharge_or_release_date",
+          "expected_character_of_discharge",
+          "current_service_supported",
+          "completed_discharge",
+          "veteran_status_verified",
+          "completed_veteran_status_supported",
+          "service_periods_present",
+          "character_of_service",
+          "active_duty_supported",
+          "service_connected_disability",
+          "record_of_service_net_years",
+          "record_of_service_net_months",
+          "record_of_service_net_days",
+          "guard_service_supported",
+          "federal_active_duty_status",
+          "deployment_count",
+          "combat_status",
+          "va_disability_rating"
+        ],
+        properties: {
+          branch: nullableString,
+          rank_or_pay_grade: nullableString,
+          active_duty_service_date: nullableString,
+          expected_discharge_or_release_date: nullableString,
+          expected_character_of_discharge: nullableString,
+          current_service_supported: nullableBoolean,
+          completed_discharge: nullableBoolean,
+          veteran_status_verified: nullableBoolean,
+          completed_veteran_status_supported: nullableBoolean,
+          service_periods_present: nullableBoolean,
+          character_of_service: nullableString,
+          active_duty_supported: nullableBoolean,
+          service_connected_disability: nullableString,
+          record_of_service_net_years: nullableNumber,
+          record_of_service_net_months: nullableNumber,
+          record_of_service_net_days: nullableNumber,
+          guard_service_supported: nullableBoolean,
+          federal_active_duty_status: nullableBoolean,
+          deployment_count: nullableNumber,
+          combat_status: nullableBoolean,
+          va_disability_rating: nullableNumber
+        }
+      },
+      benefits: {
+        type: "object",
+        additionalProperties: false,
+        required: ["rating_threshold"],
+        properties: {
+          rating_threshold: nullableString
+        }
+      },
+      derived: {
+        type: "object",
+        additionalProperties: false,
+        required: [
+          "issuer",
+          "document_date",
+          "veteran_status_supported",
+          "completed_veteran_status_supported"
+        ],
+        properties: {
+          issuer: nullableString,
+          document_date: nullableString,
+          veteran_status_supported: nullableBoolean,
+          completed_veteran_status_supported: nullableBoolean
+        }
+      }
+    }
   };
 }
 
@@ -134,7 +261,24 @@ export async function extractClaimsWithOpenAi(
     throw new Error("OpenAI response did not include output_text");
   }
 
-  return parseOpenAiJsonResponse(outputText);
+  return normalizeExtractedClaims(parseOpenAiJsonResponse(outputText));
+}
+
+export function normalizeExtractedClaims(claims: ExtractedClaims): ExtractedClaims {
+  const normalized: ExtractedClaims = {
+    ...claims,
+    subject: { ...(claims.subject ?? {}) },
+    service: { ...(claims.service ?? {}) },
+    benefits: { ...(claims.benefits ?? {}) },
+    derived: { ...(claims.derived ?? {}) },
+    review_reasons: [...(claims.review_reasons ?? [])]
+  };
+
+  normalizeDerived(normalized);
+  normalizeService(normalized);
+  applyReviewRules(normalized);
+
+  return normalized;
 }
 
 async function toDataUrl(imagePath: string): Promise<string> {
@@ -164,4 +308,126 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 function normalizePath(value: string): string {
   return value.replaceAll("\\", "/").replace(/^\.\//, "");
+}
+
+function normalizeDerived(claims: ExtractedClaims): void {
+  if (!claims.derived) return;
+  const issuer = claims.derived.issuer;
+  if (typeof issuer === "string") {
+    claims.derived.issuer = normalizeIssuer(issuer);
+  }
+  const documentDate = claims.derived.document_date;
+  if (typeof documentDate === "string") {
+    claims.derived.document_date = normalizeDate(documentDate);
+  }
+}
+
+function normalizeService(claims: ExtractedClaims): void {
+  if (!claims.service) return;
+  const service = claims.service;
+  if (typeof service.branch === "string") {
+    service.branch = normalizeBranch(service.branch);
+  }
+  for (const field of ["active_duty_service_date", "expected_discharge_or_release_date"] as const) {
+    if (typeof service[field] === "string") {
+      service[field] = normalizeDate(service[field]);
+    }
+  }
+  if (typeof service.expected_character_of_discharge === "string") {
+    service.expected_character_of_discharge = normalizeCharacter(service.expected_character_of_discharge);
+  }
+  if (typeof service.character_of_service === "string") {
+    service.character_of_service = normalizeCharacter(service.character_of_service);
+  }
+}
+
+function applyReviewRules(claims: ExtractedClaims): void {
+  if (!claims.service || !claims.derived) return;
+  const isCurrentServiceLetter = claims.document_type === "statement_of_service" ||
+    claims.service.current_service_supported === true ||
+    Boolean(claims.service.expected_discharge_or_release_date);
+
+  if (isCurrentServiceLetter) {
+    claims.needs_human_review = true;
+    claims.derived.completed_veteran_status_supported = false;
+    claims.service.completed_veteran_status_supported = false;
+    addReviewReason(claims, "current service or expected discharge document requires human review");
+  }
+}
+
+function addReviewReason(claims: ExtractedClaims, reason: string): void {
+  const existing = claims.review_reasons ?? [];
+  if (!existing.includes(reason)) {
+    existing.push(reason);
+  }
+  claims.review_reasons = existing;
+}
+
+function normalizeIssuer(value: string): string {
+  const upper = value.toUpperCase();
+  if (upper.includes("DEPARTMENT OF THE ARMY")) return "Department of the Army";
+  if (upper.includes("DEPARTMENT OF VETERANS AFFAIRS")) return "Department of Veterans Affairs";
+  if (upper.includes("NATIONAL GUARD")) return "National Guard";
+  return toTitleCase(value);
+}
+
+function normalizeBranch(value: string): string {
+  const upper = value.toUpperCase();
+  if (upper === "ARMY") return "Army";
+  if (upper === "NAVY") return "Navy";
+  if (upper === "AIR FORCE") return "Air Force";
+  if (upper === "MARINE CORPS") return "Marine Corps";
+  if (upper === "COAST GUARD") return "Coast Guard";
+  if (upper === "SPACE FORCE") return "Space Force";
+  if (upper.includes("NATIONAL GUARD")) return "National Guard";
+  return toTitleCase(value);
+}
+
+function normalizeCharacter(value: string): string {
+  return value.trim().toLowerCase().replaceAll(/\s+/g, "_");
+}
+
+function normalizeDate(value: string): string {
+  const trimmed = value.trim();
+  const slashMatch = trimmed.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (slashMatch) {
+    const [, month, day, year] = slashMatch;
+    return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+  }
+
+  const textMatch = trimmed.match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);
+  if (textMatch) {
+    const [, day, monthName, year] = textMatch;
+    const month = monthNumber(monthName);
+    if (month) {
+      return `${year}-${month}-${day.padStart(2, "0")}`;
+    }
+  }
+
+  return trimmed;
+}
+
+function monthNumber(monthName: string): string | undefined {
+  const months = new Map([
+    ["january", "01"],
+    ["february", "02"],
+    ["march", "03"],
+    ["april", "04"],
+    ["may", "05"],
+    ["june", "06"],
+    ["july", "07"],
+    ["august", "08"],
+    ["september", "09"],
+    ["october", "10"],
+    ["november", "11"],
+    ["december", "12"]
+  ]);
+  return months.get(monthName.toLowerCase());
+}
+
+function toTitleCase(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .replaceAll(/\b[a-z]/g, (letter) => letter.toUpperCase());
 }
